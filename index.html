@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de San Valentín</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+        }
+        h1 {
+            color: #d6336c;
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+        .heart {
+            font-size: 50px;
+            color: #d6336c;
+            animation: heartbeat 1.5s infinite;
+        }
+        img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+            margin-top: 10px;
+        }
+        .heart-container {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .heart-shape {
+            width: 20px;
+            height: 20px;
+            background-color: #d6336c;
+            transform: rotate(-45deg);
+            position: relative;
+        }
+        .heart-shape::before,
+        .heart-shape::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            background-color: #d6336c;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart-shape::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart-shape::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="heart-container">
+            <div class="heart-shape"></div>
+            <div class="heart-shape"></div>
+            <div class="heart-shape"></div>
+        </div>
+        <img src="amor1.jpg" alt="Foto de tu persona especial">
+        <div class="heart">❤️</div>
+        <h1>Feliz San Valentín, [Nombre]</h1>
+        <p>Para mi persona especial,</p>
+        <p>Eres la luz de mis días, la alegría en mis momentos y el amor que llena mi corazón.</p>
+        <p>Gracias por estar a mi lado. Te quiero mucho. ❤️</p>
+    </div>
+</body>
+</html>
