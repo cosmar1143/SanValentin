@@ -33,87 +33,119 @@
         .heart {
             font-size: 50px;
             color: #d6336c;
+            cursor: pointer;
             animation: heartbeat 1.5s infinite;
-        }
-        img {
-            width: 100px;
-            height: auto;
-            border-radius: 50%;
-            margin-top: 10px;
-        }
-        .heart-container {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-        }
-        .heart-shape {
-            width: 20px;
-            height: 20px;
-            background-color: #d6336c;
-            transform: rotate(-45deg);
-            position: relative;
-        }
-        .heart-shape::before,
-        .heart-shape::after {
-            content: "";
-            width: 20px;
-            height: 20px;
-            background-color: #d6336c;
-            border-radius: 50%;
-            position: absolute;
-        }
-        .heart-shape::before {
-            top: -10px;
-            left: 0;
-        }
-        .heart-shape::after {
-            left: 10px;
-            top: 0;
         }
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
+        /* Estilos del carrusel */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+        .prev { left: 5px; }
+        .next { right: 5px; }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <div class="heart-container">
-            <div class="heart-shape"></div>
-            <div class="heart-shape"></div>
-            <div class="heart-shape"></div>
-        </div>
-        <img src="amor1.jpg" alt="Foto de tu persona especial">
-        <audio id="music" src="Mi_corazon_encantado.mp3" loop></audio>
         <h1>Toca el corazón</h1>
         <div class="heart" onclick="toggleMusic()">❤️</div>
+        
+        <!-- Carrusel de imágenes -->
+        <div class="carousel-container">
+            <div class="carousel-images">
+                <img src="amor1.jpg" alt="Foto 1">
+                <img src="amor2.jpg" alt="Foto 2">
+                <img src="amor3.jpg" alt="Foto 3">
+                <img src="amor4.jpg" alt="Foto 4">
+                <img src="amor5.jpg" alt="Foto 5">
+                <img src="amor6.jpg" alt="Foto 6">
+                <img src="amor7.jpg" alt="Foto 7">
+                <img src="amor8.jpg" alt="Foto 8">
+                <img src="amor9.jpg" alt="Foto 9">
+                <img src="amor10.jpg" alt="Foto 10">
+                <img src="amor11.jpg" alt="Foto 11">
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <audio id="music" src="Mi_corazon_encantado.mp3" loop></audio>
+        
         <h1>Amor de mi vida, Feliz San Valentín</h1>
         <p>Para mi persona especial,</p>
         <p>Eres la luz de mis días, la alegría en mis momentos y el amor que llena mi corazón.</p>
         <p>Gracias por estar a mi lado. Te quiero mucho. ❤️</p>
     </div>
+
 <script>
-        let audio = document.getElementById("music");
+    let audio = document.getElementById("music");
 
-        function toggleMusic() {
-            if (audio.paused) {
-                audio.play().catch(error => console.log("El navegador bloqueó la reproducción automática."));
-            } else {
-                audio.pause();
-            }
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play().catch(error => console.log("El navegador bloqueó la reproducción automática."));
+        } else {
+            audio.pause();
         }
+    }
 
-        // Pausar la música cuando el usuario sale de la página
-        document.addEventListener("visibilitychange", function() {
-            if (document.hidden) {
-                audio.pause();
-            }
-        });
-    </script>
-    
+    // Pausar la música cuando el usuario sale de la página
+    document.addEventListener("visibilitychange", function() {
+        if (document.hidden) {
+            audio.pause();
+        }
+    });
+
+    // Carrusel de imágenes
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".carousel-images img");
+    const totalSlides = slides.length;
+    const carousel = document.querySelector(".carousel-images");
+
+    function moveSlide(direction) {
+        slideIndex = (slideIndex + direction + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+
+    function updateCarousel() {
+        const offset = -slideIndex * 100;
+        carousel.style.transform = `translateX(${offset}%)`;
+    }
+
+    function autoSlide() {
+        moveSlide(1);
+    }
+
+    setInterval(autoSlide, 3000); // Cambia de imagen cada 3 segundos
+</script>
+
 </body>
 </html>
