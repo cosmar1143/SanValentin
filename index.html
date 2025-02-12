@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta de San Valentín</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e6329e;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            max-width: 400px;
-            position: relative;
-        }
-        h1 {
-            color: #d6336c;
-        }
-        p {
-            color: #333;
-            font-size: 18px;
-        }
-        .heart {
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #e6329e;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        overflow: hidden; /* Evita que el contenido se desborde */
+    }
+    
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 90vw; /* Ajusta al ancho de la pantalla */
+        height: 90vh; /* Ajusta al alto de la pantalla */
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center; /* Centra el contenido */
+        overflow: hidden; /* Evita que se desborde */
+    }
+            .heart {
             font-size: 50px;
             color: #d6336c;
             cursor: pointer;
@@ -41,23 +42,30 @@
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
-        /* Estilos del carrusel */
-        .carousel-container {
-            position: relative;
-            width: 100%;
-            max-width: 300px;
-            margin: auto;
-            overflow: hidden;
-            border-radius: 10px;
-        }
-        .carousel-images {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-        }
-        .carousel-images img {
-            width: 100%;
-            border-radius: 10px;
-        }
+    
+    /* Ajuste del carrusel */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 300px;
+        height: 250px; /* Asegura que las imágenes se vean */
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    
+    .carousel-images {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        transition: transform 0.5s ease-in-out;
+    }
+    
+    .carousel-images img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+    }
         .prev, .next {
             position: absolute;
             top: 50%;
@@ -70,14 +78,18 @@
             border-radius: 50%;
         }
         .prev { left: 5px; }
-        .next { right: 5px; }
+        .next { right: 5px; }   
     </style>
 </head>
 <body>
 
     <div class="card">
-        <h1>Toca el corazón</h1>
-        <div class="heart" onclick="toggleMusic()">❤️</div>
+
+        <div class="heart-container">
+            <h1>Toca el corazón</h1>
+            <div class="heart" onclick="toggleMusic()">❤️</div>
+        </div>
+
         
         <!-- Carrusel de imágenes -->
         <div class="carousel-container">
