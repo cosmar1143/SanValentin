@@ -69,12 +69,14 @@
         .carousel-images {
             display: flex;
             flex-wrap: nowrap;
+            width: 100%;
             transition: transform 0.5s ease-in-out;
         }
 
         .carousel-images img {
             width: 100%;
             height: auto;
+            min-width: 100%; /* Asegura que solo una imagen se muestre a la vez */
             max-height: 200px; /* Ajuste para que las imágenes no se recorten */
             object-fit: contain; /* Evita deformaciones y cortes */
             border-radius: 10px;
@@ -161,6 +163,8 @@
         porque desde que estás en mi vida cada día me enamoro de ti y te demustro lo mucho que estoy enamorado de ti.
         Dicho lo anterior, quiero pasar muchos 14 de Febrero a tu lado, es decir, quiero pasar muchos días demostrandote amor plenamente.
         Feliz San Valentín!!!</p>
+        <br>
+
     </div>
 
 <script>
@@ -182,19 +186,27 @@
 
     // Carrusel de imágenes
     let slideIndex = 0;
-    const slides = document.querySelectorAll(".carousel-images img");
-    const totalSlides = slides.length;
-    const carousel = document.querySelector(".carousel-images");
+const slides = document.querySelectorAll(".carousel-images img");
+const totalSlides = slides.length;
+const carousel = document.querySelector(".carousel-images");
 
-    function moveSlide(direction) {
-        slideIndex = (slideIndex + direction + totalSlides) % totalSlides;
-        updateCarousel();
+function moveSlide(direction) {
+    slideIndex += direction;
+
+    // Si llegamos al final, volver al inicio sin retraso
+    if (slideIndex >= totalSlides) {
+        slideIndex = 0;
+    } else if (slideIndex < 0) {
+        slideIndex = totalSlides - 1;
     }
 
-    function updateCarousel() {
-        const offset = -slideIndex * 100;
-        carousel.style.transform = `translateX(${offset}%)`;
-    }
+    updateCarousel();
+}
+
+function updateCarousel() {
+    carousel.style.transition = "transform 0.5s ease-in-out";
+    carousel.style.transform = `translateX(${-100 * slideIndex}%)`;
+}
 
     setInterval(() => moveSlide(1), 4000);
 </script>
