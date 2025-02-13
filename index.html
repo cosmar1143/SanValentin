@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carta de San Valentín</title>
     <style>
+        /* Ajustes generales */
         body {
             font-family: 'Arial', sans-serif;
             background-color: #e6329e;
@@ -14,48 +15,47 @@
             height: 100vh;
             margin: 0;
             padding: 10px;
-            overflow-x: hidden;
+            box-sizing: border-box;
+            overflow: hidden;
         }
-       .card {
+
+        /* Tarjeta principal */
+        .card {
             background: white;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
-            max-width: 350px;
-            position: relative;
+            width: 90vw; /* Ocupar 90% del ancho disponible */
+            max-width: 400px; /* Máximo tamaño para que no se haga muy grande */
+            max-height: 90vh;
+            overflow-y: auto; /* Habilitar scroll si el contenido es largo */
         }
+
         h1 {
             color: #d6336c;
-            front-size: 22px;
+            font-size: 22px;
         }
+
         p {
             color: #333;
-            font-size: 18px;
+            font-size: 16px;
             line-height: 1.4;
         }
-        .heart-container {
-            font-size: 20px;
-            color: #d6336c;
-            cursor: pointer;
-            margin-bottom: 20px; /* Agrega espacio debajo del título */
-            text-align: center;
-            padding-top: 15px; /* Empuja el texto hacia abajo */
-            margin-bottom: 10px;
-        }
+
         .heart {
             font-size: 50px;
             color: #d6336c;
             cursor: pointer;
             animation: heartbeat 1.5s infinite;
-            text-align: center;
-            
         }
+
         @keyframes heartbeat {
             0% { transform: scale(1); }
             50% { transform: scale(1.2); }
             100% { transform: scale(1); }
         }
+
         /* Estilos del carrusel */
         .carousel-container {
             position: relative;
@@ -65,16 +65,21 @@
             overflow: hidden;
             border-radius: 10px;
         }
+
         .carousel-images {
             display: flex;
+            flex-wrap: nowrap;
             transition: transform 0.5s ease-in-out;
         }
+
         .carousel-images img {
             width: 100%;
-            border-radius: 10px;
-            object-fit: cover; /**/
+            height: auto;
+            max-height: 200px; /* Ajuste para que las imágenes no se recorten */
+            object-fit: contain; /* Evita deformaciones y cortes */
             border-radius: 10px;
         }
+
         .prev, .next {
             position: absolute;
             top: 50%;
@@ -87,13 +92,14 @@
             border-radius: 50%;
             font-size: 14px;
         }
+
         .prev { left: 5px; }
         .next { right: 5px; }
 
-                /* Ajustes para pantallas pequeñas */
+        /* Ajustes para pantallas pequeñas */
         @media (max-width: 400px) {
             .card {
-                max-width: 90%;
+                width: 95vw;
                 padding: 15px;
             }
             h1 {
@@ -109,7 +115,7 @@
                 max-width: 90%;
             }
             .carousel-images img {
-                height: 180px;
+                max-height: 180px;
             }
         }
     </style>
@@ -117,10 +123,9 @@
 <body>
 
     <div class="card">
-        <div class="heart-container">
-            <h1>Toca el corazón</h1>
-            <div class="heart" onclick="toggleMusic()">❤️</div>
-        </div>
+        <h1>Toca el corazón</h1>
+        <div class="heart" onclick="toggleMusic()">❤️</div>
+        <audio id="music" src="Mi_corazon_encantado.mp3" loop></audio>
         
         <!-- Carrusel de imágenes -->
         <div class="carousel-container">
@@ -130,19 +135,11 @@
                 <img src="amor3.jpg" alt="Foto 3">
                 <img src="amor4.jpg" alt="Foto 4">
                 <img src="amor5.jpg" alt="Foto 5">
-                <img src="amor6.jpg" alt="Foto 6">
-                <img src="amor7.jpg" alt="Foto 7">
-                <img src="amor8.jpg" alt="Foto 8">
-                <img src="amor9.jpg" alt="Foto 9">
-                <img src="amor10.jpg" alt="Foto 10">
-                <img src="amor11.jpg" alt="Foto 11">
             </div>
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
         </div>
 
-        <audio id="music" src="Mi_corazon_encantado.mp3" loop></audio>
-        
         <h1>Amor de mi vida, Feliz San Valentín</h1>
         <p>Para mi persona especial,</p>
         <p>Llegaste a mi vida sin buscarte
@@ -164,7 +161,6 @@
         porque desde que estás en mi vida cada día me enamoro de ti y te demustro lo mucho que estoy enamorado de ti.
         Dicho lo anterior, quiero pasar muchos 14 de Febrero a tu lado, es decir, quiero pasar muchos días demostrandote amor plenamente.
         Feliz San Valentín!!!</p>
-
     </div>
 
 <script>
@@ -178,7 +174,6 @@
         }
     }
 
-    // Pausar la música cuando el usuario sale de la página
     document.addEventListener("visibilitychange", function() {
         if (document.hidden) {
             audio.pause();
@@ -201,11 +196,7 @@
         carousel.style.transform = `translateX(${offset}%)`;
     }
 
-    function autoSlide() {
-        moveSlide(1);
-    }
-
-    setInterval(autoSlide, 3000); // Cambia de imagen cada 3 segundos
+    setInterval(() => moveSlide(1), 4000);
 </script>
 
 </body>
